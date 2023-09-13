@@ -8,7 +8,24 @@ body {
 
 img {
   border: 1px solid #fff;
-  width: 5rem;
+  margin-left: 25%;
+  margin-right :25%;
+
+}
+#dataImg {
+  width: 50%;
+  height: 50%;
+}
+
+#androidImg {
+  width: 50%;
+  height: 20%;
+
+}
+
+#spotifyImg {
+  width: 50%;
+  height: 20%;
 }
   
   /* Style the header (h1) */
@@ -38,7 +55,7 @@ img {
   
   /* Style the main content area */
   main {
-    max-width: 800px;
+    max-width: 80vw;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
