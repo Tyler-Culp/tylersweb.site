@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJN4K2FD5G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RJN4K2FD5G');
+</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler's website</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Note: CSS validation fails on most pages due to using lr when defining my grid space. I assume this is either
+            because there is a different variable that is preferred that does the same thing or that lr isn't defined on
+                whatever version of CSS that validator is using to check.-->
+    <h1>Tyler Culp's Website</h1>
+    <nav>
+        <a href="index.html">About</a>
+        <a href="education.html">Education</a>
+        <a href="projects.html">Projects</a>
+    </nav>
+    <br>
+    <main>
+        <div class="aboutMe">
+            <h2>About Me</h2>
+            <div class="firstRow">
+                <p id="firstP" class="paragraphs">My name is Tyler and I am a third year at UC San Diego where I am pursuing a degree in Mathematics-Computer Science. I was born and raised in Sacramento, California,
+                 attending C.K. McClatchy highschool where I played baseball and wrestled for all four years. Growing up in Sacramento I always enjoyed being outdoors, spending lots of my Summers at the river with friends. 
+                 This has carried over to my time in San Diego as well with my trying to stop by the beach whenever I get the free time for it.</p>
+                <picture id="selfPicture">
+                    <source media="(min-width:100px)" srcset="dummyPicture-min.webp">
+                    <img src="puppy.png" alt="A picture of me" width="150" height="200">
+                </picture>
+            </div>
+            <br>
+            <section>
+                <h3>My Journey in Software</h3>
+                <p id="secondP" class="paragraphs"> When entering college at UC San Diego I had no real concept of what software engineering really was. In fact, most things relating to computers were somewhat of a mystery to me.
+                    On a whim, I decided to take an intro to programming class at the end of my freshman year and I found that I really enjoyed it. From then on I was hooked, I knew that
+                    software was what I wanted to do. I decided to pursue a degree in Mathematics-Computer Science the next quarter and now after two years, and tons of computer science classes,
+                    I'm now getting ready to graduate this Spring.
+                </p>
+            </section>
+            <br>
+            <section>
+                <h3>My Interests</h3>
+                <p class="paragraphs"> Outside of my school life I enjoy staying active and going to the gym, or going to kickboxing practices. I also like taking advantage of my school's location and visiting the beach as often as possible, usually showing up around
+                    sunset and eating my dinner on the beach. Like most people I also love to play my fair share of video games, my favorite being Hollow Knight, and even joined the video game developement club at UCSD where I made some simple games using Unity.
+
+                </p>
+            </section>
+            <br>
+        </div>
+        <!-- <div id="transformP">
+            <img id="hollowKnightP" src="hollowKnightss.webp" width="200" height="200" alt="Hollow Knight">
+        </div> -->
+    </main>
+    <footer>
+        <p id="author">Author: Tyler Culp</p>
+        <p>Contact: <a href="mailto:tculp@ucsd.edu">tculp@ucsd.edu</a></p>
+    </footer>
+
+</body>
+</html>

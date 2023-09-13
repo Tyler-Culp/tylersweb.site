@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJN4K2FD5G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RJN4K2FD5G');
+</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1000">
+    <title>My Projects</title>
+    <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+    <h1>Projects</h1>
+    <nav>
+        <a href="index.html">About</a>
+        <a href="education.html">Education</a>
+        <a href="projects.html">Projects</a>
+    </nav>
+    <main>
+        <p>A list of some projects I have done over the last year or so. Here is my <a id="gitLink" rel="noopener" href="https://github.com/Tyler-Culp?tab=repositories" target="_blank">Github</a> in case you would like
+            to see the source code for a few projects.</p>
+
+        <aside>
+            <details>
+                <summary>Note</summary>
+                <p>Note: Not all projects source code will be there as some repositories are private for academic integrity purposes.</p>
+            </details>
+        </aside>
+        <ol>
+            <li><p><b>Android Compass App</b></p>
+                <p class="listP">
+                    This was a quarter long project that I worked on with a team of 6 people consisting of two app iterations. The first was an app where you could input 3 different
+                    coordinate (assumedly corresponding to your house, your parent's house, and a friend's house) and 3 unique labels and then see icons of those house including your labels
+                    on a live compass. This compass would update as you turned your phone or moved locations, meaning that the icons corresponding to each set of coordinates would always be pointing
+                    in the same direction. In the second iteration instead of inputing coordinate, you inputted friends unique ID's to be able to pull their current live coordinates from a database. This
+                    version of the compass would update as you turned your phone or moved around, or as your friend's moved around. Both applications were fully built in Android Studio using mainly Java.
+                </p>
+            </li>
+            <li><p><b>Marvel Movie Success Predictor</b></p>
+            <p class="listP">In this project I worked with a team of 5 other people where we tried to discover if there was a way to predict the success of a
+                 marvel movie, both critically and commercially, based on general movie statistics like its run time, budget, year released, etc. 
+                 This was mainly done with python inside of Jupyter Notebooks where we used libraries like pandas, numpy, patsy, statsmodels, etc.
+                 Through this project we found that things like production budget did have a positive correlation with the success of the movie.</p></li>
+                 <figure>
+                    <img src="dataScienceProject.webp" alt="Screen shot of the compass app in action">
+                    <figcaption>Shows the compass UI when we have one inputted coordinate and label</figcaption>
+                </figure>
+            <li><p><b>Top Spotify Songs</b></p>
+                <p class="listP">This was a project I worked on last Summer where I attempted to make a Spotify web application that would allow a user to log into
+                    their spotify account and then show what their top songs are for all time on the platform. It would also allow you to view main profile
+                    features like number of playlists or number of friends on the app.
+                </p>
+            </li>
+            <li><p><b>This Website!</b></p>
+                <p class="listP">I fully built this website from scratch starting with HTML, and then styling it with my own CSS, and finally adding in some JavaScript
+                    to give the website a little more interactivity. This was a great way of diving head first into front end development and I got some great insights
+                    into how the web actually works!
+                </p>
+            </li>
+            <li><p><b>MineSweeper</b></p>
+                <p class="listP">A fun little pet project which recreates MineSweeper fully using java code. It allows you to play the game from within the computer's terminal.
+                    Doesn't do too much other than that, but can be a fun little time killer.
+                </p>
+            </li>
+        </ol>
+        <br>
+        <!-- <div id="pictures">
+            <figure>
+                <img src="dataScienceProject.webp" alt="Screen shot of the compass app in action" width="300" height="400">
+                <figcaption>Shows the compass UI when we have one inputted coordinate and label</figcaption>
+            </figure>
+            <figure>
+                <img src="spotify_code.webp" alt="Log in function" width="450" height="400">
+                <figcaption>The code for logging into Spotify account</figcaption>
+            </figure>
+            <figure>
+                <img src="ms_ss.webp" alt="MineSweeper in the terminal" width="350" height="400">
+                <figcaption>The code allows you to play minesweeper in a terminal</figcaption>
+            </figure>
+        </div> -->
+    </main>
+    <footer>
+        <p id="author">Author: Tyler Culp</p>
+        <p>Contact: <a href="mailto:tculp@ucsd.edu">tculp@ucsd.edu</a></p>
+    </footer>
+</body>
+</html>

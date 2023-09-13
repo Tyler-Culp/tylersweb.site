@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Miscellaneous</h1>
+    <hr>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">About</a>
+            </li>
+            <li>
+                <a href="education.html">Education</a>
+            </li>
+            <li>
+                <a href="projects.html">Projects</a>
+            </li>
+            <li>
+                <a href="contact.html">Contact</a>
+            </li>
+            <li>
+                <a href="miscellaneous.html">Miscellaneous</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <h3>The Code tag</h3>
+        <p>Here is an interactive <code>button</code> using the code tag!</p>
+        <br>
+
+        <h3>The canvas and script tags</h3>
+        <canvas id="aCanvas">
+            You're JavaScript is disabled or your browser does not support me.
+        </canvas>
+
+        <script>
+            var canvas = document.getElementById("aCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#710025";
+            ctx.fillRect(0, 0, 80, 80);
+        </script>
+        <br>
+
+        <h3>The svg tag</h3>
+        <p>The svg tag is a way to put graphics on a webpage like so: <svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" fill="blue" ></circle></svg> also,
+             such graphics can be nested inside of other tags like what is shown here.</p>
+
+        <br>
+        <h3>The pre tag</h3>
+        <pre>While the p tag doesn't really care about white spaces, new lines, or tabs,
+                    the pre tag caputres
+                those interesting
+            inputs.
+        Potentially making for an interesting poem format.
+        </pre>
+        <br>
+
+        <h3>iframe Tag</h3>
+        <p>An iframe tag is similar to an image tag in that it displays a picture. The differnece is img gives something static, while iframe can be used dynamically.</p>
+        <iframe src="https://ucsd.edu/" title="W3Schools Free Online Web Tutorials"></iframe>
+        <br>
+
+        <h3>The audio tag</h3>
+        <p>Used to put playable audio into an html document</p>
+        <audio controls>
+            <source src="Piano_sound.mp3" type="audio/mpeg">
+            Browser does not support audio tag.
+        </audio>
+        <br>
+
+        <h3>The video tag</h3>
+        <video controls>
+            <source src="M09-1317.mp4" type="video/mp4">
+            Browser doesn't support video tag
+        </video>
+
+
+    </main>
+    
+</body>
+</html>

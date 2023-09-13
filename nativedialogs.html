@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button examples</title>
+    <script type="text/javascript" src="DOMPurify-main/dist/purify.min.js"></script>
+</head>
+<body>
+    <a href="customdialogs.html">Custom Dialogs</a><br><br>
+
+    <button id="alertBtn" class="btn">Alert</button>
+    <button id="confirmBtn" class="btn">Confirm</button>
+    <button id="promptBtn" class="btn">Prompt</button>
+    <button id="saferPromptBtn" class="btn">Safer Prompt</button>
+
+    <script>
+        let someObj = {};
+
+        someObj.alertPressed = function() {
+            alert("Alert Pressed");
+        };
+
+        someObj.confirmPressed = function () {
+            let outP = document.getElementById('outP');
+            outP.hidden = true;
+            setTimeout (function() {
+                let didConfirm = confirm("Confirm Pressed");
+                outP.innerHTML = `Confirm result: ${didConfirm}`;
+                outP.hidden = false
+            }, 0);
+            // outP.innerHTML = `Confirm result: ${didConfirm}`;
+            // outP.hidden = false
+        };
+
+        someObj.promptPressed = function () {
+            let outP = document.getElementById('outP');
+            outP.hidden = true;
+            setTimeout (function() {
+                let thePrompt = prompt("What is your name?", "");
+                if (thePrompt === null || thePrompt ==="") {
+                    thePrompt = "No name entered :(";
+                }
+                outP.innerHTML = `Prompt Result: ${thePrompt}`;
+                outP.hidden = false;
+            }, 0);
+        }
+
+        someObj.saferPromptPressed = function () {
+            let outP = document.getElementById('outP');
+            outP.hidden = true;
+            setTimeout (function() {
+                let saferPrompt = prompt("What is your name?", "");
+                if (saferPrompt === null || saferPrompt ==="") {
+                    saferPrompt = "No name entered :(";
+                }
+                saferPrompt = DOMPurify.sanitize(saferPrompt);
+                outP.innerHTML = `Prompt Result: ${saferPrompt}`;
+                outP.hidden = false;
+            }, 0)
+        }
+
+        window.addEventListener('load', function() {
+            let alertBtn = document.getElementById('alertBtn');
+            let confirmBtn = document.getElementById('confirmBtn');
+            let promptBtn = document.getElementById('promptBtn');
+            let saferPromptBtn = document.getElementById('saferPromptBtn');
+
+            alertBtn.addEventListener('click', someObj.alertPressed, true);
+            confirmBtn.addEventListener('click', someObj.confirmPressed, true);
+            promptBtn.addEventListener('click', someObj.promptPressed, true);
+            saferPromptBtn.addEventListener('click', someObj.saferPromptPressed, true);
+
+        });
+
+    </script>
+    <br>
+
+    <output id="confirmOutput">
+        <p id="outP" style="border:5px double black; font-size: 1.5rem" hidden></p>
+    </output>
+    
+</body>
+</html>
