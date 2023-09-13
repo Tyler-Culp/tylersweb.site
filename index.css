@@ -55,6 +55,12 @@ body {
   #selfPicture {
     float: right;
     margin-left: 20px;
+    border: 1px solid #fff;
+  }
+
+  img {
+    width: 17vw;
+    height: 38vh;
   }
   
   /* Style the footer */
