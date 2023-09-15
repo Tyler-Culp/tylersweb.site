@@ -28,7 +28,11 @@ app.get('/login', (req, res) => {
     client_id: CLIENT_ID,
     scope,
     redirect_uri: REDIRECT_URI,
-  })}`);
+  })}`, {
+    headers: {
+      'Cache-Control': 'no-store'
+    }
+  });
 });
   
 app.get('/callback', async (req, res) => {
