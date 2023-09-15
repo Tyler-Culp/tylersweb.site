@@ -59,6 +59,7 @@ body {
   }
 
   img {
+    max-width: 90%;
     width: 17vw;
     height: 39vh;
   }
@@ -80,6 +81,15 @@ body {
   #author a:hover {
     text-decoration: underline;
   }
+
+@media (max-width: 768px) {
+    img {
+      /* width: 10vw;
+      height: 20vh; */
+        width: 80%; /* Set image width to 100% on smaller screens */
+        max-height: 40vh; /* Limit the maximum height to maintain aspect ratio */
+    }
+}
   
 
 
