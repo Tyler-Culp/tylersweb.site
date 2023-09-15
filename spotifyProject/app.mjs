@@ -23,6 +23,7 @@ app.get('/login', (req, res) => {
 
   // Generate a random state value (can be more secure in production)
   // Redirect the user to the Spotify Accounts service for authorization
+  res.setHeader('Cache-Control', 'no-store');
   res.redirect(`https://accounts.spotify.com/authorize?${querystring.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
