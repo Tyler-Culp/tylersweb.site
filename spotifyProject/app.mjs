@@ -45,8 +45,29 @@ app.get('/login', (req, res) => {
       const tokenData = await tokenResponse.json();
       let accessToken = tokenData.access_token;
   
-      // Redirect to a new URL where the user's top songs are displayed
-      res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre>`);
+      console.log("Top songs reached");
+      try {
+        // Fetch the user's top songs using the access token
+        const response = await fetch(`${SPOTIFY_API_BASE}/me/top/tracks`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+          },
+        });
+    
+        if (!response.ok) {
+          throw new Error('Top songs request failed');
+        }
+    
+        const topSongs = await response.json();
+        console.log(`top songs json = ${topSongs}`);
+    
+        // Display the user's top songs
+        res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre>`);
+      } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).send('Error fetching top songs');
+      }
+
     } catch (error) {
       console.error('Error:', error.message);
       res.status(500).send('Error obtaining access token');
