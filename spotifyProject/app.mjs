@@ -5,9 +5,11 @@ import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
 const app = express();
 app.use((req, res, next) => {
+  console.log("In app.use");
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
+  next();
 });
 const PORT = 3000;
 
