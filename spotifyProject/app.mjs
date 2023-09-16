@@ -1,9 +1,17 @@
 import express from 'express';
 import querystring from 'querystring';
 import fetch from 'node-fetch';
+import cors from 'cors'
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
 const app = express();
+
+const corsOptions = {
+  origin: 'https://spotify.com', // Allow requests from this domain
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed HTTP methods
+  credentials: true, // Allow cookies and credentials to be sent
+};
+
 app.use((req, res, next) => {
   console.log("In app.use");
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -11,6 +19,8 @@ app.use((req, res, next) => {
   res.setHeader('Expires', '0');
   next();
 });
+app.use(cors(corsOptions));
+
 const PORT = 3000;
 
 
@@ -81,12 +91,24 @@ app.get('/callback', async (req, res) => {
                 <button onclick="logout()">Log Out Here</button>
                 <script>
                   async function logout() {
-                    await setTimeout(() => {
-                      window.open("https://www.spotify.com/logout/","_blank");
-                    }, 0);
-                    setTimeout(() => {
-                      window.location.href = "https://tylersweb.site/spotifyProject/login";
-                    }, 1);
+                    fetch('https://www.spotify.com/logout/)
+                    .then(response => {
+                      if (response == 200) {
+                        window.location.href = "https://tylersweb.site/spotifyProject/login";
+                      }
+                      else {
+                        console.log("repsonded with" + response);
+                      }
+                    });
+                    .catch(err => {
+                      console.log("fetch request error: " + err);
+                    });
+                    // await setTimeout(() => {
+                    //   window.open("https://www.spotify.com/logout/","_blank");
+                    // }, 0);
+                    // setTimeout(() => {
+                    //   window.location.href = "https://tylersweb.site/spotifyProject/login";
+                    // }, 1);
                   }
                 </script>`);
     } catch (error) {
