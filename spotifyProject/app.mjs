@@ -78,7 +78,17 @@ app.get('/callback', async (req, res) => {
   
       // Display the user's top songs
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
-                <a href="./login">Log Out Here</a>`);
+                <button onclick="logout()">Log Out Here</button>
+                <script>
+                  function logout() {
+                    setTimeout(() => {
+                      window.open("https://www.spotify.com/logout/","_blank");
+                    }, 0);
+                    setTimeout(() => {
+                      window.location.href = "https://tylersweb.site/spotifyProject/login";
+                    }, 0);
+                  }
+                </script>`);
     } catch (error) {
       console.error('Error:', error.message);
       res.status(500).send('Error fetching top songs');
@@ -89,7 +99,8 @@ app.get('/callback', async (req, res) => {
     res.status(500).send('Error obtaining access token');
   }
 });
-  
+
+app.get('/logout', asy)
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
