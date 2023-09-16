@@ -102,11 +102,13 @@ app.get('/callback', async (req, res) => {
                     //   console.error("Fetch request error: " + err);
                     // }
                     await setTimeout(() => {
-                      window.open("https://www.spotify.com/logout/","_blank");
+                      let tempWindow = window.open("https://www.spotify.com/logout/","_blank");
+                      tempWindow.close();
                     }, 0);
                     setTimeout(() => {
                       window.location.href = "https://tylersweb.site/spotifyStuff.html";
                     }, 1);
+
                   }
                 </script>`);
     } catch (error) {
