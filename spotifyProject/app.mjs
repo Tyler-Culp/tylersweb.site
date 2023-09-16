@@ -80,8 +80,8 @@ app.get('/callback', async (req, res) => {
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
                 <button onclick="logout()">Log Out Here</button>
                 <script>
-                  function logout() {
-                    setTimeout(() => {
+                  async function logout() {
+                    await setTimeout(() => {
                       window.open("https://www.spotify.com/logout/","_blank");
                     }, 0);
                     setTimeout(() => {
