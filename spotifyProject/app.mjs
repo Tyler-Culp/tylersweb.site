@@ -68,8 +68,6 @@ app.get('/callback', async (req, res) => {
     const tokenData = await tokenResponse.json();
     let accessToken = tokenData.access_token;
 
-    res.cookie('access_token', accessToken, { httpOnly: true });
-
     console.log("Top songs reached");
     try {
       // Fetch the user's top songs using the access token
@@ -129,7 +127,7 @@ app.get("/logout", async (req, res) => {
   fetch("https://www.spotify.com/logout/")
   .then(res => {
     if (res.status == 200 ) {
-      window.location.href = "https://tylersweb.site/spotifyProject/login";
+      res.redirect("https://tylersweb.site/spotifyProject/login");
     }
     else {
       console.log(`res = ${res}`);
