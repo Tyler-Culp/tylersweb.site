@@ -90,6 +90,7 @@ app.get('/callback', async (req, res) => {
                         console.log("Log out failed :(");
                       }
                     });
+                  }
                 </script>`);
     } catch (error) {
       console.error('Error:', error.message);
