@@ -90,26 +90,26 @@ app.get('/callback', async (req, res) => {
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
                 <button onclick="logout()">Log Out Here</button>
                 <script>
-                  async function logout() {
-                    fetch('https://www.spotify.com/logout/)
-                    .then(response => {
-                      if (response == 200) {
-                        window.location.href = "https://tylersweb.site/spotifyProject/login";
-                      }
-                      else {
-                        console.log("repsonded with" + response);
-                      }
-                    })
-                    .catch(err => {
-                      console.log("fetch request error: " + err);
-                    });
-                    // await setTimeout(() => {
-                    //   window.open("https://www.spotify.com/logout/","_blank");
-                    // }, 0);
-                    // setTimeout(() => {
-                    //   window.location.href = "https://tylersweb.site/spotifyProject/login";
-                    // }, 1);
-                  }
+                  // async function logout() {
+                  //   fetch('https://www.spotify.com/logout/)
+                  //   .then(response => {
+                  //     if (response == 200) {
+                  //       window.location.href = "https://tylersweb.site/spotifyProject/login";
+                  //     }
+                  //     else {
+                  //       console.log("repsonded with" + response);
+                  //     }
+                  //   })
+                  //   .catch(err => {
+                  //     console.log("fetch request error: " + err);
+                  //   });
+                  //   // await setTimeout(() => {
+                  //   //   window.open("https://www.spotify.com/logout/","_blank");
+                  //   // }, 0);
+                  //   // setTimeout(() => {
+                  //   //   window.location.href = "https://tylersweb.site/spotifyProject/login";
+                  //   // }, 1);
+                  // }
                 </script>`);
     } catch (error) {
       console.error('Error:', error.message);
@@ -121,6 +121,21 @@ app.get('/callback', async (req, res) => {
     res.status(500).send('Error obtaining access token');
   }
 });
+
+async function logout() {
+  fetch('https://www.spotify.com/logout/')
+  .then(response => {
+    if (response.status === 200) {
+      window.location.href = "https://tylersweb.site/spotifyProject/login";
+    }
+    else {
+      console.log("responded with " + response.status);
+    }
+  })
+  .catch(err => {
+    console.log("fetch request error: " + err);
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
