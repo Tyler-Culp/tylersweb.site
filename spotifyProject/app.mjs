@@ -99,7 +99,7 @@ app.get('/callback', async (req, res) => {
                       else {
                         console.log("repsonded with" + response);
                       }
-                    });
+                    })
                     .catch(err => {
                       console.log("fetch request error: " + err);
                     });
