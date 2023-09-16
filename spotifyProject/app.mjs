@@ -24,6 +24,7 @@ app.get('/login', (req, res) => {
   // Generate a random state value (can be more secure in production)
   // Redirect the user to the Spotify Accounts service for authorization
   res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Cache-Control', 'no-cache');
   res.redirect(`https://accounts.spotify.com/authorize?${querystring.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
@@ -38,27 +39,7 @@ app.get('/callback', async (req, res) => {
   console.log(`code = ${code}`);
   try {
     // Exchange the authorization code for an access token
-    const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-      },
-      body: querystring.stringify({
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: REDIRECT_URI,
-      }),
-    });
-
-    if (!tokenResponse.ok) {
-      throw new Error('Token request failed');
-    }
-
-    const tokenData = await tokenResponse.json();
-    let accessToken = tokenData.access_token;
-
-    res.cookie('access_token', accessToken, { httpOnly: true });
+    let accessToken = await getToken(code);
 
     console.log("Top songs reached");
     try {
@@ -78,7 +59,7 @@ app.get('/callback', async (req, res) => {
   
       // Display the user's top songs
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
-                <a href="./login">Log Out Here</a>`);
+                <a href="./logout">Log Out Here</a>`);
     } catch (error) {
       console.error('Error:', error.message);
       res.status(500).send('Error fetching top songs');
@@ -89,6 +70,42 @@ app.get('/callback', async (req, res) => {
     res.status(500).send('Error obtaining access token');
   }
 });
+
+app.get('/logout', async(req, res) => {
+  let refreshToken = req.query.refreshToken;
+  let authOps = {
+    url: 'https://accounts.spotify.com/api/token'
+  }
+});
+
+async function getToken(code) {
+  try {
+    // Exchange the authorization code for an access token
+    const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+      },
+      body: querystring.stringify({
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri: REDIRECT_URI,
+      }),
+    });
+
+    if (!tokenResponse.ok) {
+      throw new Error('Token request failed');
+    }
+    const tokenData = await tokenResponse.json();
+    let accessToken = tokenData.access_token;
+    return accessToken
+  }
+  catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('Error obtaining access token');
+  }
+}
   
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
