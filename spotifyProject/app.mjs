@@ -89,7 +89,7 @@ app.get('/callback', async (req, res) => {
       for (let i = 0 ; i < topSongs.length ; i++) {
         let song = topSongs[i].name;
         let artist = topSongs[i].artists[0].name;
-        list += `<li>${i + 1} : ${artist} - ${song}</li>`;
+        list += `<li> ${i + 1} : ${artist} - ${song}</li>`;
       }
       list += `</ul>`
       console.log(`top songs json = ${list}`);
@@ -97,7 +97,7 @@ app.get('/callback', async (req, res) => {
 
   
       // Display the user's top songs
-      res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
+      res.send(`<h1>Your Top Songs on Spotify</h1><pre>${list}</pre><br><br>
                 <button onclick="logout()">Log Out Here</button>
                 <script>
                   async function logout() {
