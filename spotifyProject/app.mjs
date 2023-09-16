@@ -81,13 +81,15 @@ app.get('/callback', async (req, res) => {
                 <button onclick="logout()">Log Out Here</button>
                 <script>
                   function logout() {
-                    setTimeout(() => {
-                      window.open("https://www.spotify.com/logout/","_blank");
-                    }, 0);
-                    setTimeout(() => {
-                      window.location.href = "https://tylersweb.site/spotifyProject/login";
-                    }, 0);
-                  }
+                    fetch("https://www.spotify.com/logout/")
+                    .then(response => {
+                      if (response.status == 200) {
+                        window.location.href = "https://tylersweb.site/spotifyProject/login";
+                      }
+                      else {
+                        console.log("Log out failed :(");
+                      }
+                    });
                 </script>`);
     } catch (error) {
       console.error('Error:', error.message);
