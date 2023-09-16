@@ -84,7 +84,7 @@ app.get('/callback', async (req, res) => {
       let topSongs = await response.json();
       console.log(`top songs json = ${topSongs}`);
       let list = "<ul>";
-      topSongs = topSongs.items[0];
+      topSongs = topSongs.items[0].artist[0].name;
 
 
   
