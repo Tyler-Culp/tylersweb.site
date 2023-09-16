@@ -101,13 +101,16 @@ app.get('/callback', async (req, res) => {
                     // catch (err) {
                     //   console.error("Fetch request error: " + err);
                     // }
+                    let tempWindow = ""
                     await setTimeout(() => {
-                      let tempWindow = window.open("https://www.spotify.com/logout/","_blank");
-                      tempWindow.close();
+                      tempWindow = window.open("https://www.spotify.com/logout/","_blank");
                     }, 0);
                     setTimeout(() => {
                       window.location.href = "https://tylersweb.site/spotifyStuff.html";
-                    }, 1);
+                    }, 0);
+                    setTimeout(() => {
+                      tempWindow.close();
+                    });
 
                   }
                 </script>`);
