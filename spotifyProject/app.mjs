@@ -108,10 +108,6 @@ app.get('/callback', async (req, res) => {
                     setTimeout(() => {
                       window.location.href = "https://tylersweb.site/spotifyStuff.html";
                     }, 0);
-                    setTimeout(() => {
-                      tempWindow.close();
-                    });
-
                   }
                 </script>`);
     } catch (error) {
