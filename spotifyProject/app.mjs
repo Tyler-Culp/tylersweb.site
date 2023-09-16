@@ -87,6 +87,36 @@ app.get('/callback', async (req, res) => {
       // Display the user's top songs
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
                 <a href="./logout">Log Out</a>`);
+    } catch (error) {
+      console.error('Error:', error.message);
+      res.status(500).send('Error fetching top songs');
+    }
+
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('Error obtaining access token');
+  }
+});
+
+app.get("/logout", async (req, res) => {
+  fetch("https://www.spotify.com/logout/")
+  .then(r => {
+    if (r.status == 200 ) {
+      res.redirect("https://tylersweb.site/spotifyProject/login");
+    }
+    else {
+      console.log(`r = ${r}`);
+    }
+  })
+  .catch(err => {
+    console.log(`logout failed : err = ${err}`);
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 
       // res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
       //           <button onclick="logout()">Log Out Here</button>
@@ -112,32 +142,3 @@ app.get('/callback', async (req, res) => {
       //               // // }, 1);
       //             }
       //           </script>`);
-    } catch (error) {
-      console.error('Error:', error.message);
-      res.status(500).send('Error fetching top songs');
-    }
-
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).send('Error obtaining access token');
-  }
-});
-
-app.get("/logout", async (req, res) => {
-  fetch("https://www.spotify.com/logout/")
-  .then(res => {
-    if (res.status == 200 ) {
-      res.redirect("https://tylersweb.site/spotifyProject/login");
-    }
-    else {
-      console.log(`res = ${res}`);
-    }
-  })
-  .catch(err => {
-    console.log(`logout failed : err = ${err}`);
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
