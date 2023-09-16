@@ -88,29 +88,32 @@ app.get('/callback', async (req, res) => {
   
       // Display the user's top songs
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
-                <button onclick="logout()">Log Out Here</button>
-                <script>
-                  async function logout() {
-                    try {
-                      let resp = await fetch("https://www.spotify.com/logout/");
-                      if (resp.status === 200) {
-                        window.location.href = "https://tylersweb.site/spotifyProject/login";
-                      }
-                      else{
-                        console.log("Responded with " + response.status);
-                      }
-                    }
-                    catch (err) {
-                      console.error("Fetch request error: " + err);
-                    }
-                    // // await setTimeout(() => {
-                    // //   window.open("https://www.spotify.com/logout/","_blank");
-                    // // }, 0);
-                    // // setTimeout(() => {
-                    // //   window.location.href = "https://tylersweb.site/spotifyProject/login";
-                    // // }, 1);
-                  }
-                </script>`);
+                <a href="./logout">Log Out</a>`);
+
+      // res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
+      //           <button onclick="logout()">Log Out Here</button>
+      //           <script>
+      //             async function logout() {
+      //               try {
+      //                 let resp = await fetch("https://www.spotify.com/logout/");
+      //                 if (resp.status === 200) {
+      //                   window.location.href = "https://tylersweb.site/spotifyProject/login";
+      //                 }
+      //                 else{
+      //                   console.log("Responded with " + response.status);
+      //                 }
+      //               }
+      //               catch (err) {
+      //                 console.error("Fetch request error: " + err);
+      //               }
+      //               // // await setTimeout(() => {
+      //               // //   window.open("https://www.spotify.com/logout/","_blank");
+      //               // // }, 0);
+      //               // // setTimeout(() => {
+      //               // //   window.location.href = "https://tylersweb.site/spotifyProject/login";
+      //               // // }, 1);
+      //             }
+      //           </script>`);
     } catch (error) {
       console.error('Error:', error.message);
       res.status(500).send('Error fetching top songs');
@@ -120,6 +123,21 @@ app.get('/callback', async (req, res) => {
     console.error('Error:', error.message);
     res.status(500).send('Error obtaining access token');
   }
+});
+
+app.get("./logout", async (req, res) => {
+  fetch("https://www.spotify.com/logout/")
+  .then(res => {
+    if (res.status == 200 ) {
+      window.location.href = "https://tylersweb.site/spotifyProject/login";
+    }
+    else {
+      console.log(`res = ${res}`);
+    }
+  })
+  .catch(err => {
+    console.log(`logout failed : err = ${err}`);
+  });
 });
 
 app.listen(PORT, () => {
