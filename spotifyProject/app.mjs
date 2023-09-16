@@ -83,9 +83,16 @@ app.get('/callback', async (req, res) => {
   
       let topSongs = await response.json();
       let list = "<ul>";
-      topSongs = topSongs.items[0].name;
+      // topSongs = topSongs.items[0].name; // This is the way to get the name of each song from the items list
       // topSongs = topSongs.items[0].artists[0].name; // This is the way to get the name of each artist from the list of 'items' in the JSON
-      console.log(`top songs json = ${topSongs}`);
+      topSongs = topSongs.items;
+      for (i = 0 ; i < topSongs.length ; i++) {
+        let song = topSongs[i].name;
+        let artist = topSongs[i].artists[0].name;
+        list += `<li>${i + 1} : ${artist} - ${song}</li>`;
+      }
+      list += `</ul>`
+      console.log(`top songs json = ${list}`);
 
 
   
