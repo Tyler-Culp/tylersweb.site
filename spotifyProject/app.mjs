@@ -81,8 +81,12 @@ app.get('/callback', async (req, res) => {
         throw new Error('Top songs request failed');
       }
   
-      const topSongs = await response.json();
+      let topSongs = await response.json();
       console.log(`top songs json = ${topSongs}`);
+      let list = "<ul>";
+      topSongs = topSongs.items[0];
+
+
   
       // Display the user's top songs
       res.send(`<h1>Your Top Songs on Spotify</h1><pre>${JSON.stringify(topSongs, null, 2)}</pre><br><br>
