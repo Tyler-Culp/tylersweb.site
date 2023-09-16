@@ -125,7 +125,7 @@ app.get('/callback', async (req, res) => {
   }
 });
 
-app.get("./logout", async (req, res) => {
+app.get("/logout", async (req, res) => {
   fetch("https://www.spotify.com/logout/")
   .then(res => {
     if (res.status == 200 ) {
