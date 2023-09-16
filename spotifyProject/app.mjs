@@ -102,7 +102,7 @@ app.get("/logout", async (req, res) => {
   fetch("https://www.spotify.com/logout/")
   .then(r => {
     if (r.status == 200 ) {
-      res.redirect("https://tylersweb.site/spotifyProject");
+      res.redirect("https://tylersweb.site/spotifyProject/spotifyStuff.html");
     }
     else {
       console.log(`r = ${r}`);
