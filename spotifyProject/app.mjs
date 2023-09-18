@@ -41,7 +41,7 @@ app.get('/callback', async (req, res) => {
       }),
     });
 
-    if (tokenResponse === null) {
+    if (!tokenResponse.ok) {
       throw new Error('Token request failed');
     }
 
