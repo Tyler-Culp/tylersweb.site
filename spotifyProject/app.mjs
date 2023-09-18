@@ -71,6 +71,7 @@ app.get('/callback', async (req, res) => {
 
   console.log("Top songs reached");
   try {
+
     // Fetch the user's top songs using the access token
     const response = await fetch(`${SPOTIFY_API_BASE}/me/top/tracks`, {
       headers: {
@@ -106,6 +107,10 @@ app.get('/callback', async (req, res) => {
                   <link rel="stylesheet" href="../app.css">
                 </head>
                 <body>
+                  <nav>
+                    <button id="short_term" onclick="shortTerm()>Last Month</button>
+                    <button id="medium_term" onclick="mediumTerm()>Last 6 Month</button>
+                    <button id="long_term" onclick="longTerm()>All Time</button>
                   <h1>Your Top Songs on Spotify</h1><pre>${list}</pre><br><br>
                   <button onclick="logout()">Log Out Here</button>
                   <script>
