@@ -65,7 +65,7 @@ app.get('/callback', async (req, res) => {
       });
     } catch (error) {
       console.error('Error:', error.message);
-      return es.status(500).send('Error obtaining access token');
+      return res.status(500).send('Error obtaining access token');
     }
   }
 
