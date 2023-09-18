@@ -30,7 +30,8 @@ app.get('/callback', async (req, res) => {
   console.log(`code = ${code}`);
   let cookieToken = req.cookies.token;
   let accessToken = ""
-  if (cookieToken && (new Date(cookieToken.expires)) < new Date()) {
+  if (cookieToken && (new Date(cookieToken.expires)) > new Date()) {
+    console.log("cookie set")
     accessToken = cookieToken
   }
   else {
@@ -64,7 +65,7 @@ app.get('/callback', async (req, res) => {
       });
     } catch (error) {
       console.error('Error:', error.message);
-      res.status(500).send('Error obtaining access token');
+      return es.status(500).send('Error obtaining access token');
     }
   }
 
