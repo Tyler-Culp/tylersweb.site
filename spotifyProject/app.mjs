@@ -61,7 +61,10 @@ app.get('/callback', async (req, res) => {
       let expirationDate = new Date();
       expirationDate.setTime(expirationDate.getTime() + (60 * 60 * 1000));
       res.cookie('token', accessToken, {
-        expires: expirationDate
+        expires: expirationDate,
+        path: '/',
+        domain: 'tylersweb.site',
+        secure: true
       });
     } catch (error) {
       console.error('Error:', error.message);
