@@ -64,6 +64,7 @@ app.get('/callback', async (req, res) => {
         expires: expirationDate
       });
     } catch (error) {
+      console.error('Token request failed:', tokenData);
       console.error('Error:', error.message);
       return res.status(500).send('Error obtaining access token');
     }
