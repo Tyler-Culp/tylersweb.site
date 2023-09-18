@@ -77,21 +77,33 @@ app.get('/callback', async (req, res) => {
 
   
       // Display the user's top songs
-      res.send(`<h1>Your Top Songs on Spotify</h1><pre>${list}</pre><br><br>
-                <button onclick="logout()">Log Out Here</button>
-                <script>
-                  async function logout() {
-                    let tempWindow = ""
-                    await setTimeout(() => {
-                      tempWindow = window.open("https://www.spotify.com/logout/");
-                      tempWindow.blur();
-                      window.focus();
-                    }, 0);
-                    setTimeout(() => {
-                      window.location.href = "https://tylersweb.site/spotifyStuff.html";
-                    }, 0);
-                  }
-                </script>`);
+      res.send(`<!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Top Songs</title>
+                    <link rel="stylesheet" href="./app.css">
+                  </head>
+                  <body>
+                    <h1>Your Top Songs on Spotify</h1><pre>${list}</pre><br><br>
+                    <button onclick="logout()">Log Out Here</button>
+                    <script>
+                      async function logout() {
+                        let tempWindow = ""
+                        await setTimeout(() => {
+                          tempWindow = window.open("https://www.spotify.com/logout/");
+                          tempWindow.blur();
+                          window.focus();
+                        }, 0);
+                        setTimeout(() => {
+                          window.location.href = "https://tylersweb.site/spotifyStuff.html";
+                        }, 0);
+                      }
+                    </script>
+                  </body>
+                </html>`);
     } catch (error) {
       console.error('Error:', error.message);
       res.status(500).send('Error fetching top songs');
