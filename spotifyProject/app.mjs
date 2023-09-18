@@ -112,25 +112,21 @@ app.get('/callback', async (req, res) => {
                 </head>
                 <body>
                   <nav>
-                    <a href = "https://tylersweb.site/spotifyProject/callback?timeRange=short_term">Last Month</a>
-                    // <button id="short_term" onclick="updateTimeRange('short_term')">Last Month</button>
-                    // <button id="medium_term" onclick="updateTimeRange('medium_term')">Last 6 Month</button>
-                    // <button id="long_term" onclick="updateTimeRange('long_term')">All Time</button>
+                    <button id="short_term" onclick="updateTimeRange('short_term')">Last Month</button>
+                    <button id="medium_term" onclick="updateTimeRange('medium_term')">Last 6 Month</button>
+                    <button id="long_term" onclick="updateTimeRange('long_term')">All Time</button>
                   <h1>Your Top Songs on Spotify</h1><pre>${list}</pre><br><br>
                   <button onclick="logout()">Log Out Here</button>
                   <script>
-                    // function shortTerm() {
-                    //   window.location.href = "https://tylersweb.site/spotifyProject/callback?timeRange=short_term"
-                    // }
-                    
-                    // function mediumTerm() {
-                    //   window.location.href = "https://tylersweb.site/spotifyProject/callback?timeRange=medium_term"
-                    // }
-
-                    // function longTerm() {
-                    //   window.location.href = "https://tylersweb.site/spotifyProject/callback?timeRange=long_term"
-                    // }
-                    
+                    function updateTimeRange(timeRange) {
+                      // Update the URL with the new query parameter without reloading the page
+                      const url = new URL(window.location);
+                      url.searchParams.set('timeRange', timeRange);
+                      history.pushState(null, '', url.toString());
+                      
+                      // Reload the page
+                      location.reload();
+                    }
                     async function logout() {
                       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                       let tempWindow = ""
