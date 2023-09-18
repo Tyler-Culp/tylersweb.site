@@ -83,7 +83,7 @@ app.get('/callback', async (req, res) => {
                   async function logout() {
                     let tempWindow = ""
                     await setTimeout(() => {
-                      tempWindow = window.open("https://www.spotify.com/logout/","_blank");
+                      tempWindow = window.open("https://www.spotify.com/logout/");
                     }, 0);
                     setTimeout(() => {
                       window.location.href = "https://tylersweb.site/spotifyStuff.html";
