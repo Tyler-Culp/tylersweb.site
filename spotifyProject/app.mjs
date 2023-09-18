@@ -1,11 +1,7 @@
-// import express from 'express';
-// import querystring from 'querystring';
-// import fetch from 'node-fetch';
-// import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
-const express = require('express');
-const querystring = require('querystring');
-const fetch = require('node-fetch').default;
-const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = require('./config');
+import express from 'express';
+import querystring from 'querystring';
+import fetch from 'node-fetch';
+import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
 const app = express();
 
