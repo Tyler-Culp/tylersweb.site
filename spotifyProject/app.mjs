@@ -84,7 +84,7 @@ app.get('/callback', async (req, res) => {
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Top Songs</title>
-                    <link rel="stylesheet" href="./app.css">
+                    <link rel="stylesheet" href="../app.css">
                   </head>
                   <body>
                     <h1>Your Top Songs on Spotify</h1><pre>${list}</pre><br><br>
