@@ -71,9 +71,13 @@ app.get('/callback', async (req, res) => {
 
   console.log("Top songs reached");
   try {
+    let timeRange = req.query.timeRange;
+    if (!timeRange) {
+      timeRange = "medium_term"
+    }
 
     // Fetch the user's top songs using the access token
-    const response = await fetch(`${SPOTIFY_API_BASE}/me/top/tracks`, {
+    const response = await fetch(`${SPOTIFY_API_BASE}/me/top/tracks?time_range=${timeRange}`, {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
@@ -115,15 +119,15 @@ app.get('/callback', async (req, res) => {
                   <button onclick="logout()">Log Out Here</button>
                   <script>
                     function shortTerm() {
-
+                      window.location.href = "https://tylersweb.site/spotifyProject/callback?timeRange=short_term"
                     }
                     
                     function mediumTerm() {
-
+                      window.location.href = "https://tylersweb.site/spotifyProject/callback?timeRange=medium_term"
                     }
 
                     function longTerm() {
-
+                      window.location.href = "https://tylersweb.site/spotifyProject/callback?timeRange=long_term"
                     }
                     
                     async function logout() {
