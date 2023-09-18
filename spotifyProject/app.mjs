@@ -30,10 +30,15 @@ app.get('/callback', async (req, res) => {
   console.log(`code = ${code}`);
   let cookieToken = req.cookies.token;
   let accessToken = ""
-  if (cookieToken && (new Date(cookieToken.expires)) > new Date()) {
+  // if (cookieToken && (new Date(cookieToken.expires)) > new Date()) {
+  //   console.log("cookie set")
+  //   accessToken = cookieToken
+  // }
+  if (cookieToken) {
     console.log("cookie set")
     accessToken = cookieToken
   }
+
   else {
     res.clearCookie('token');
     try {
