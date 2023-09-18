@@ -98,7 +98,6 @@ app.get('/callback', async (req, res) => {
       list += `<li> ${i + 1} : ${artist} - ${song}</li>`;
     }
     list += `</ul>`
-    console.log(`top songs json = ${list}`);
 
     // Display the user's top songs
     res.send(`<!DOCTYPE html>
