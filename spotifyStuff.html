@@ -7,18 +7,79 @@
     <title>Spotify Project</title>
 </head>
 <body>
-    <main>
-        <h1>Login to Spotify</h1>
-        <p>Click the button below to log in:</p>
-        <button onclick="redirectToLogin()">Login with Spotify</button>
-      
-        <script>
-          function redirectToLogin() {
-            // Redirect the user to the /login endpoint on your Express app
-            window.location.href = './spotifyProject/login';
-          }
-        </script>
-    </main>
+  <nav>
+    <a href="./index.html">Back to main website</a>
+  <main>
+      <h1>Login to Spotify</h1>
+      <p>Click the button below to log in:</p>
+      <button onclick="redirectToLogin()">Login with Spotify</button>
+    
+      <script>
+        function redirectToLogin() {
+          // Redirect the user to the /login endpoint on your Express app
+          window.location.href = './spotifyProject/login';
+        }
+      </script>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f0f0f0;
+        }
+
+        nav {
+          background-color: #333;
+          color: white;
+          padding: 10px;
+        }
+
+        nav a {
+          color: white;
+          text-decoration: none;
+        }
+
+        nav a:hover {
+          text-decoration: underline;
+        }
+
+        main {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 50px auto;
+          max-width: 400px;
+          padding: 20px;
+          background-color: white;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        p {
+          margin-bottom: 20px;
+        }
+
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          background-color: #1db954;
+          color: white;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+
+        button:hover {
+          background-color: #168f3f;
+        }
+
+      </style>
+  </main>
     
 </body>
 </html>
