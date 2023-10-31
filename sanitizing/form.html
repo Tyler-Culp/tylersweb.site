@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Form Submission</title>
+</head>
+<body>
+    <form id="inputForm">
+        <label for="userInput">Enter text:</label>
+        <input type="text" id="userInput">
+        <button type="button" onclick="updateParagraph()">Submit</button>
+    </form>
+
+    <!-- Display user input in a vulnerable way -->
+    <h2>Vulnerable Output (Demo)</h2>
+    <p id="vulnerableParagraph"></p>
+
+    <script>
+        // Function to update the paragraph with user input
+        function updateParagraph() {
+            let userInput = document.getElementById("userInput").value;
+            let pTag = document.getElementById("vulnerableParagraph");
+            if (userInput.includes("<script>")) {
+                pTag.innerHTML = "No script tags allowed!"
+            }
+            else {
+                // WARNING: This line is vulnerable to XSS!
+                document.getElementById("vulnerableParagraph").innerHTML = userInput;
+            }
+        }
+    </script>
+</body>
+</html>
