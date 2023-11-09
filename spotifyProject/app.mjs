@@ -36,33 +36,39 @@ app.get('/callback', async (req, res) => {
   let accessToken = "";
   const { code } = req.query;
   console.log(`code = ${code}`);
-  try {
-    // Exchange the authorization code for an access token
-    const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-      },
-      body: querystring.stringify({
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: REDIRECT_URI,
-      }),
-    });
 
-    if (!tokenResponse.ok) {
-      throw new Error(`Token request failed with status ${tokenResponse.status}`);
+  if (req.session.accessToken) {
+    accessToken = req.session.accessToken;
+  }
+  else{
+    try {
+      // Exchange the authorization code for an access token
+      const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+        },
+        body: querystring.stringify({
+          grant_type: 'authorization_code',
+          code,
+          redirect_uri: REDIRECT_URI,
+        }),
+      });
+
+      if (!tokenResponse.ok) {
+        throw new Error(`Token request failed with status ${tokenResponse.status}`);
+      }
+
+      const tokenData = await tokenResponse.json();
+      console.log(`tokenData = ${tokenData}`);
+      accessToken = tokenData.access_token;
+      console.log(`accessToken = ${accessToken}`);
+      req.session.accessToken = accessToken;
+    } catch (error) {
+      console.error('Error1:', error.message);
+      return res.status(500).send('Error obtaining access token');
     }
-
-    const tokenData = await tokenResponse.json();
-    console.log(`tokenData = ${tokenData}`);
-    accessToken = tokenData.access_token;
-    console.log(`accessToken = ${accessToken}`);
-    req.session.accessToken = accessToken;
-  } catch (error) {
-    console.error('Error1:', error.message);
-    return res.status(500).send('Error obtaining access token');
   }
 
 
