@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
-
 const app = express();
 app.use(cookieParser());
 
@@ -53,12 +52,12 @@ app.get('/callback', async (req, res) => {
     });
 
     if (!tokenResponse.ok) {
-      throw new Error('Token request failed');
+      throw new Error(`Token request failed with status ${tokenResponse.status}`);
     }
 
     const tokenData = await tokenResponse.json();
     console.log(`tokenData = ${tokenData}`);
-    let accessToken = tokenData.access_token;
+    accessToken = tokenData.access_token;
     console.log(`accessToken = ${accessToken}`);
     req.session.accessToken = accessToken;
   } catch (error) {
@@ -82,7 +81,7 @@ app.get('/callback', async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error('Top songs request failed');
+      throw new Error(`Top songs request failed ${response.status}`);
     }
 
     let topSongs = await response.json();
