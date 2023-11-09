@@ -58,7 +58,7 @@ app.get('/callback', async (req, res) => {
     let accessToken = tokenData.access_token;
     req.session.accessToken = accessToken;
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error('Error1:', error.message);
     return res.status(500).send('Error obtaining access token');
   }
 
@@ -136,7 +136,7 @@ app.get('/callback', async (req, res) => {
                 </body>
               </html>`);
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error('Error2:', error.message);
     res.status(500).send('Error fetching top songs');
   }
 });
