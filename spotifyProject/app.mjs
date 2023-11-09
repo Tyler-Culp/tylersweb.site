@@ -2,12 +2,19 @@ import express from 'express';
 import querystring from 'querystring';
 import fetch from 'node-fetch';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
 const app = express();
 app.use(cookieParser());
 
-const PORT = 3000;
+app.use(session({
+  secret: "A very secretive key",
+  resave: false,
+  saveUninitialized: true
+}));
+
+const PORT = 3001;
 
 const SPOTIFY_API_BASE = 'https://api.spotify.com/v1';
 
@@ -28,54 +35,33 @@ app.get('/callback', async (req, res) => {
   console.log("callback page reached");
   const { code } = req.query;
   console.log(`code = ${code}`);
-  let cookieToken = req.cookies.token;
-  let accessToken = ""
-  // if (cookieToken && (new Date(cookieToken.expires)) > new Date()) {
-  //   console.log("cookie set")
-  //   accessToken = cookieToken
-  // }
-  if (cookieToken) {
-    console.log("cookie set")
-    accessToken = cookieToken
+  try {
+    // Exchange the authorization code for an access token
+    const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
+      },
+      body: querystring.stringify({
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri: REDIRECT_URI,
+      }),
+    });
+
+    if (!tokenResponse.ok) {
+      throw new Error('Token request failed');
+    }
+
+    const tokenData = await tokenResponse.json();
+    accessToken = tokenData.access_token;
+    req.session.accessToken = accessToken;
+  } catch (error) {
+    console.error('Error:', error.message);
+    return res.status(500).send('Error obtaining access token');
   }
 
-  else {
-    res.clearCookie('token');
-    try {
-      // Exchange the authorization code for an access token
-      const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
-        },
-        body: querystring.stringify({
-          grant_type: 'authorization_code',
-          code,
-          redirect_uri: REDIRECT_URI,
-        }),
-      });
-  
-      if (!tokenResponse.ok) {
-        throw new Error('Token request failed');
-      }
-  
-      const tokenData = await tokenResponse.json();
-      accessToken = tokenData.access_token;
-  
-      let expirationDate = new Date();
-      expirationDate.setTime(expirationDate.getTime() + (60 * 60 * 1000));
-      res.cookie('token', accessToken, {
-        expires: expirationDate,
-        path: '/',
-        domain: 'tylersweb.site',
-        secure: true
-      });
-    } catch (error) {
-      console.error('Error:', error.message);
-      return res.status(500).send('Error obtaining access token');
-    }
-  }
 
   console.log("Top songs reached");
   try {
@@ -143,7 +129,7 @@ app.get('/callback', async (req, res) => {
                         window.focus();
                       }, 0);
                       setTimeout(() => {
-                        window.location.href = "https://tylersweb.site/spotifyStuff.html";
+                        window.location.href = "https://tylersweb.site/spotifyProject/logout";
                       }, 0);
                     }
                   </script>
@@ -153,9 +139,18 @@ app.get('/callback', async (req, res) => {
     console.error('Error:', error.message);
     res.status(500).send('Error fetching top songs');
   }
-
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error clearing session:', err);
+    }
+
+    // Redirect the user to https://tylersweb.site
+    res.redirect('https://tylersweb.site');
+  });
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
