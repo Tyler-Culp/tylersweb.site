@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
+let accessToken;
+
 const app = express();
 app.use(cookieParser());
 
