@@ -57,7 +57,9 @@ app.get('/callback', async (req, res) => {
       });
 
       if (!tokenResponse.ok) {
-        throw new Error(`Token request failed with status ${tokenResponse.status}`);
+        // throw new Error(`Token request failed with status ${tokenResponse.status}`);
+        alert('token Response:', tokenResponse.status);
+        return res.redirect("https://tylersweb.site/spotifyProject/logout");
       }
 
       const tokenData = await tokenResponse.json();
@@ -67,7 +69,8 @@ app.get('/callback', async (req, res) => {
       req.session.accessToken = accessToken;
     } catch (error) {
       console.error('Error1:', error.message);
-      return res.status(500).send('Error obtaining access token');
+      alert('Error1:', error.message);
+      return res.redirect("https://tylersweb.site/spotifyProject/logout");
     }
   }
 
@@ -87,7 +90,8 @@ app.get('/callback', async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Top songs request failed ${response.status}`);
+      alert('Spotify API response error:', response.status);
+      return res.redirect("https://tylersweb.site/spotifyProject/logout");
     }
 
     let topSongs = await response.json();
@@ -145,8 +149,8 @@ app.get('/callback', async (req, res) => {
                 </body>
               </html>`);
   } catch (error) {
-    console.error('Error2:', error.message);
-    res.status(500).send('Error fetching top songs');
+    alert('Error rendering list:', error.message);
+    return res.redirect("https://tylersweb.site/spotifyProject/logout");
   }
 });
 
@@ -157,7 +161,7 @@ app.get('/logout', (req, res) => {
     }
 
     // Redirect the user to https://tylersweb.site
-    res.redirect('https://tylersweb.site');
+    res.redirect('https://tylersweb.site/spotifyStuff.html');
   });
 });
 app.listen(PORT, () => {
