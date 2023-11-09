@@ -55,7 +55,7 @@ app.get('/callback', async (req, res) => {
     }
 
     const tokenData = await tokenResponse.json();
-    accessToken = tokenData.access_token;
+    let accessToken = tokenData.access_token;
     req.session.accessToken = accessToken;
   } catch (error) {
     console.error('Error:', error.message);
