@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './config.mjs';
 
-let accessToken;
 
 const app = express();
 app.use(cookieParser());
@@ -35,6 +34,7 @@ app.get('/login', (req, res) => {
   
 app.get('/callback', async (req, res) => {
   console.log("callback page reached");
+  let accessToken = "";
   const { code } = req.query;
   console.log(`code = ${code}`);
   try {
@@ -57,7 +57,9 @@ app.get('/callback', async (req, res) => {
     }
 
     const tokenData = await tokenResponse.json();
+    console.log(`tokenData = ${tokenData}`);
     let accessToken = tokenData.access_token;
+    console.log(`accessToken = ${accessToken}`);
     req.session.accessToken = accessToken;
   } catch (error) {
     console.error('Error1:', error.message);
